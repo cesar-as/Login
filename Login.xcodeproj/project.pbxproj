@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,7 @@
 		B0DD8D112AF0EDE8009A7E7A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0DD8D102AF0EDE8009A7E7A /* Preview Assets.xcassets */; };
 		B0DD8D132AF0EDE8009A7E7A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DD8D122AF0EDE8009A7E7A /* Persistence.swift */; };
 		B0DD8D162AF0EDE8009A7E7A /* Login.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B0DD8D142AF0EDE8009A7E7A /* Login.xcdatamodeld */; };
+		B0DD8D222AF0FF95009A7E7A /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = B0DD8D212AF0FF95009A7E7A /* Network */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0DD8D222AF0FF95009A7E7A /* Network in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +91,9 @@
 			dependencies = (
 			);
 			name = Login;
+			packageProductDependencies = (
+				B0DD8D212AF0FF95009A7E7A /* Network */,
+			);
 			productName = Login;
 			productReference = B0DD8D062AF0EDE6009A7E7A /* Login.app */;
 			productType = "com.apple.product-type.application";
@@ -117,6 +122,9 @@
 				Base,
 			);
 			mainGroup = B0DD8CFD2AF0EDE6009A7E7A;
+			packageReferences = (
+				B0DD8D202AF0FF94009A7E7A /* XCLocalSwiftPackageReference "../Packages/Network" */,
+			);
 			productRefGroup = B0DD8D072AF0EDE6009A7E7A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -350,6 +358,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		B0DD8D202AF0FF94009A7E7A /* XCLocalSwiftPackageReference "../Packages/Network" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/Network;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B0DD8D212AF0FF95009A7E7A /* Network */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Network;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		B0DD8D142AF0EDE8009A7E7A /* Login.xcdatamodeld */ = {

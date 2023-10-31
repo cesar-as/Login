@@ -9,77 +9,67 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
-
+    
+    @State var username: String = ""
+    @State var password: String = ""
+    
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+        ZStack {
+            Color.teal.edgesIgnoringSafeArea(.all)
+            VStack {
+                Text("SIGN IN")
+                    .font(.system(size: 24))
+                    .padding(EdgeInsets(top: 20, leading: 40, bottom: 20, trailing: 40))
+                Image(systemName: "person.crop.circle")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundColor(.gray)
+                    .frame(width: 100, height: 100)
+                    .padding(10)
+                TextField("username", text: $username)
+                    .textFieldStyle(.roundedBorder)
+                    .foregroundColor(.black)
+                    .keyboardType(.emailAddress)
+                    .padding(10)
+                SecureField("password", text: $password)
+                    .textFieldStyle(.roundedBorder)
+                    .foregroundColor(.black)
+                    .keyboardType(.emailAddress)
+                    .padding(10)
+                
+                HStack{
+                    Text("Remember-me")
+                        .font(.system(size: 12))
+                        .foregroundColor(.teal)
+                    Spacer()
+                    ZStack{
+                        Text("Forgot your password?")
+                            .font(.system(size: 12))
+                            .foregroundColor(.teal)
                     }
                 }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
+                .padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10))
+                
+                Button {
+                    print("Logar")
+                } label: {
+                    Text("LOGIN")
+                        .foregroundColor(Color.white)
+                        .frame(height: 50)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.teal)
                 }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
+                .cornerRadius(8)
+                .padding(10)
+
+                
             }
-            Text("Select an item")
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+            .background(Color.white)
+            .padding(EdgeInsets(top: 120, leading: 40, bottom: 200, trailing: 40))
         }
     }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 #Preview {
     ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
