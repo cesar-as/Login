@@ -21,7 +21,8 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            backgroundColor.edgesIgnoringSafeArea(.all)
+            LinearGradient(colors: [backgroundColor, cardBackgroundColor], startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all)
+            
             VStack {
                 Text("SIGN IN")
                     .padding(10)
